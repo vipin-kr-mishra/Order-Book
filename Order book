@@ -1,0 +1,120 @@
+#Stock price for buying( cost price)
+buy_price=[11.1,12.2,13.3,14.4]
+
+#the stock 
+buy=[100,500,900,800]
+
+
+
+#sorted in ascending order
+buy_price.sort()
+
+#zip two list in dictionary
+b_tot=dict(zip(buy_price,buy))
+
+#the stock 
+sell=[100,500,900,800]
+
+#the stock  price for selling(The selling price)
+sell_price=[11.1,12.2,13.3,14.4]
+
+# zip two list in dictionary
+s_total=dict(zip(sell_price,sell))
+
+# take input from user which task we want to perform
+n=int(input("For Limit press 1 For market press 2 For stop press 3 : "))
+
+# Limit order:- In this set limit means if sell stock only if price greater or equal to limit and
+#                buy item only if value  equal or less then limit
+if(n==1):
+    print("limit order")
+    
+    #input number of share
+    n_of_share =int(input("Enter no of share : "))
+    
+    #take input from user which task want to perform
+    k=int(input("if you want to sell then Enter 1 and if buy then 0 : "))
+    if(k==1):
+        
+        #Enter limit  price
+        limit_price=input("Enter limit_price for sell : ")
+        
+        # max function to find maximum in list
+        m=max(buy_price)
+        if(limit_price<=str(m)):
+            b_tot[m]=b_tot[m]+n_of_share
+    print(b_tot)
+    if(k==0):
+        limit_price=input("Enter limit_price for buy : ")
+        for i in s_total:
+            if(str(i)<limit_price and n_of_share!=0):
+                
+                #condition for checking which value  is greater between them
+                if(n_of_share>s_total[i]):
+                    n_of_share=n_of_share - s_total[i]
+                    s_total[i]=0
+                else:
+                    t=s_total[i]
+                    s_total[i]=s_total[i] - n_of_share
+                    t=t - s_total[i]
+                    n_of_share = t - n_of_share
+    print(s_total)
+    
+# Now in market Order:- In market order buy stock at price which is lowest that time and sell stock when price is maximum
+
+if(n==2):
+    print("Market Order")
+    n_of_share= int(input("Enter no.of share : "))
+    u=int(input("if you want to sell then enter 1 and if buy then 0 : "))
+    if(u==1):
+        m=max(buy_price)
+        b_tot[m]=b_tot[m] + n_of_share
+    print(b_tot)
+    if(u==0):
+        for i in s_total:
+            if(n_of_share!=0):
+                if(n_of_share>s_total[i]):
+                    n_of_share=n_of_share - s_total[i]
+                    s_total[i]=0
+                else:
+                    t=s_total[i]
+                    s_total[i]=s_total[i] - n_of_share
+                    t=t - s_total[i]
+                    n_of_share = t - n_of_share
+    print(s_total)
+    
+# In Stop order buy or sell after particular value
+if(n==3):
+    print("In stock order")
+    n_of_share = int(input("Enter no. of  share : "))
+    g= int(input("if you want to sell enter 1 and if buy then 0 : "))
+    if(g==1):
+        start = input("Enter minimum price from stock start : ")
+        m = max(buy_price)
+        if(start<=str(m)):
+            b_tot[m]=b_tot[m]+n_of_share
+    print(b_tot)
+    if(g==0):
+        stop = input("Enter price for buy : ")
+        for i in s_total:
+            if(str(i)>=stop and n_of_share!=0):
+                if(n_of_share>s_total[i]):
+                    n_of_share=n_of_share - s_total[i]
+                    s_total[i]=0
+                else:
+                    t=s_total[i]
+                    s_total[i]=s_total[i] - n_of_share
+                    t=t - s_total[i]
+                    n_of_share = t - n_of_share
+    print(s_total)
+                
+                
+            
+                
+    
+    
+    
+    
+                
+                
+        
